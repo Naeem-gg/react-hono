@@ -7,7 +7,7 @@ function App() {
 
   useEffect(()=>{
     async function getData(){
-      const json = await fetch('http://localhost:8080/api/abc');
+      const json = await fetch('http://localhost:8080/');
       const data = await json.json()
       console.log(data)
       setData(data)
