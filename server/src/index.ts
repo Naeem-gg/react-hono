@@ -1,11 +1,16 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
+import { db } from '../drizzle/db'
+import { users } from '../drizzle/schema'
 
 const app = new Hono()
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
+app.use('/', cors())
+app.get('/', async(c) => {
+  const record = await db.select().from(users)
+  // return c.text('Hello Hono!')
+  return c.json(record)
 })
 
 const port = 8080
